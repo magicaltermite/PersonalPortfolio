@@ -30,20 +30,13 @@ public class GunController : MonoBehaviour {
     }
 
     public void ShootGun() {
-        Debug.Log("Shoot gun called");
         if (gunData.currentAmmo <= 0) return;
-        Debug.Log("gun has enough ammo");
         if (!CanShoot()) return;
-        Debug.Log("Gun can shoot");
 
         Transform cameraTransform = camera.transform;
         
-        Debug.DrawRay(cameraTransform.position, cameraTransform.forward, Color.red, 3);
-
-        
         if (Physics.Raycast(camera.transform.position, cameraTransform.forward, out RaycastHit hitInfo,
-                gunData.maxDistance, ~playerMask)) {
-            Debug.Log("Hello what the fuck");
+                gunData.maxDistance)) {
             Debug.Log(hitInfo.transform.name);
             
             IDamagable damageable = hitInfo.transform.GetComponent<IDamagable>();
