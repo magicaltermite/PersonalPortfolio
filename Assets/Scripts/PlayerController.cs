@@ -3,12 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField]
-    private float playerSpeed = 2.0f;
-    [SerializeField]
-    private float jumpHeight = 1.0f;
-    [SerializeField]
-    private float gravityValue = -9.81f;
+    [SerializeField] private float playerSpeed = 2.0f;
+    [SerializeField] private float jumpHeight = 1.0f;
+    [SerializeField] private float gravityValue = -9.81f;
     
     private CharacterController controller;
     private Vector3 playerVelocity;
@@ -31,19 +28,14 @@ public class PlayerController : MonoBehaviour
         }
 
         Vector2 movement = inputManager.GetPlayerMovement();
-        Vector3 move = new Vector3(movement.x, 0, movement.y);
+        Vector3 move = new (movement.x, 0, movement.y);
         move = cameraTransform.forward.normalized * move.z + cameraTransform.right.normalized * move.x;
         move.y = 0f;
         controller.Move(move * Time.deltaTime * playerSpeed);
 
-        // Changes the characters forward position when not moving
-        //if (move != Vector3.zero) {
-        //    gameObject.transform.forward = move;
-        //}
-
         // Changes the height position of the player..
         if (inputManager.PlayerJumpedThisFrame() && groundedPlayer) {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3.0f * gravityValue);
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -3 * gravityValue);
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;
