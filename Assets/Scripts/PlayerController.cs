@@ -27,13 +27,14 @@ public class PlayerController : MonoBehaviour
             playerVelocity.y = 0f;
         }
 
+        // Makes the player move
         Vector2 movement = inputManager.GetPlayerMovement();
         Vector3 move = new (movement.x, 0, movement.y);
         move = cameraTransform.forward.normalized * move.z + cameraTransform.right.normalized * move.x;
-        move.y = 0f;
+        move.y = 0f; // is used to make sure the player is not moving upwards, when the camera is moved
         controller.Move(move * Time.deltaTime * playerSpeed);
 
-        // Changes the height position of the player..
+        // Makes the player jump
         if (inputManager.PlayerJumpedThisFrame() && groundedPlayer) {
             playerVelocity.y += Mathf.Sqrt(jumpHeight * -3 * gravityValue);
         }
