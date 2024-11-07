@@ -16,12 +16,10 @@ public class PlayerShoot : MonoBehaviour {
     private void Update() {
         if (inputManager.PlayerPressedShoot()) {
             ShootInput?.Invoke();
-            UIManager.Instance.SetAmmo();
         }
 
         if (inputManager.PlayerPressedReload()) {
             ReloadInput?.Invoke();
-            UIManager.Instance.SetAmmo();
         }
     }
 }

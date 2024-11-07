@@ -50,4 +50,8 @@ public class InputManager : MonoBehaviour {
     public bool PlayerPressedReload() {
         return playerControls.Player.Reload.triggered;
     }
+
+    public bool PlayerPressedPause() {
+        return playerControls.Player.Pause.triggered;
+    }
 }

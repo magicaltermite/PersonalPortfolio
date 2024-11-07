@@ -37,18 +37,18 @@ public class GunController : MonoBehaviour {
         
         if (Physics.Raycast(camera.transform.position, cameraTransform.forward, out RaycastHit hitInfo,
                 gunData.maxDistance)) {
-            Debug.Log(hitInfo.transform.name);
-            
+            Debug.Log("Gun has been shot");
             IDamagable damageable = hitInfo.transform.GetComponent<IDamagable>();
             damageable?.Damage(gunData.damage);
         }
         
         gunData.currentAmmo--;
+        UIManager.Instance.SetAmmo();
         timeSinceLastShot = 0;
         OnGunShot();
     }
 
-    public void StartReloadGun() {
+    private void StartReloadGun() {
         if (!gunData.reloading) {
             StartCoroutine(ReloadGun());
         }
@@ -56,12 +56,13 @@ public class GunController : MonoBehaviour {
     
     private IEnumerator ReloadGun() {
         gunData.reloading = true;
-
+        
         yield return new WaitForSeconds(gunData.reloadTime);
-
+        
         if (gunData.currentAmmo < gunData.magSize) {
             gunData.currentAmmo++;    
             gunData.reloading = false;
+            UIManager.Instance.SetAmmo();
         }
         else {
             gunData.reloading = false;
