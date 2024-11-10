@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Revolver
   m_EditorClassIdentifier: 
   name: Revolver
-  damage: 25
+  damage: 34
   maxDistance: 6000
-  currentAmmo: 5
+  currentAmmo: 6
   magSize: 6
   fireRate: 600
   reloadTime: 0.1
