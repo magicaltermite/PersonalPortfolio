@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour {
     
     private bool hasTealKey = true;
     private bool hasOrangeKey  = true;
+    private bool hasRedKey, hasGreenKey, hasBlueKey;
     
     
     private void Awake() {
@@ -32,11 +33,35 @@ public class GameManager : MonoBehaviour {
                 hasTealKey = true;
                 Debug.Log("Picked up teal key: " + hasTealKey);
                 break;
+
+            case KeyType.GreenKey:
+                hasGreenKey = true;
+                Debug.Log("Picked up green key: " + hasGreenKey);
+                break;
+            
+            case KeyType.BlueKey:
+                hasBlueKey = true;
+                Debug.Log("Picked up blue key: " + hasBlueKey);
+                break;
+            
+            case KeyType.RedKey:
+                hasRedKey = true;
+                Debug.Log("Picked up blue key: " + hasBlueKey);
+                break;
             
             default:
                 Debug.Log("Key type does not exist");
                 break;
             
+        }
+    }
+
+    public void OpenChurchDoor(GameObject churchDoor) {
+        if (hasBlueKey && hasGreenKey && hasRedKey) {
+            Destroy(churchDoor);
+        }
+        else {
+            Debug.Log("You don't have all the keys!");
         }
     }
 
@@ -46,10 +71,15 @@ public class GameManager : MonoBehaviour {
     
     
     
+    
+    
 }
 
 public enum KeyType {
     TealKey,
-    OrangeKey
+    OrangeKey,
+    GreenKey,
+    BlueKey,
+    RedKey
 }
 }
