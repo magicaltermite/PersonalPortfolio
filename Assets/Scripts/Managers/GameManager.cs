@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Managers {
 public class GameManager : MonoBehaviour {
@@ -70,6 +71,18 @@ public class GameManager : MonoBehaviour {
     }
     
     
+    public void LoadScene(string sceneName) {
+        if (sceneName.Equals("EndScene") || sceneName.Equals("MainMenu")) {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+        }
+        
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void QuitGame() {
+        Application.Quit();
+    }
     
     
     
