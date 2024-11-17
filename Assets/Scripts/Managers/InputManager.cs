@@ -54,4 +54,8 @@ public class InputManager : MonoBehaviour {
     public bool PlayerPressedPause() {
         return playerControls.Player.Pause.triggered;
     }
+
+    public bool PlayerIsSprinting() {
+        return playerControls.Player.Sprint.triggered;
+    }
 }

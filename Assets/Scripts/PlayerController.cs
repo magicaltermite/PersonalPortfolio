@@ -3,9 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float playerSpeed = 2.0f;
+    [SerializeField] private float playerSpeed = 10.0f;
     [SerializeField] private float jumpHeight = 1.0f;
     [SerializeField] private float gravityValue = -9.81f;
+    [SerializeField] private float sprintModifier = 10.0f;
     
     private CharacterController controller;
     private Vector3 playerVelocity;
@@ -26,13 +27,21 @@ public class PlayerController : MonoBehaviour
         if (groundedPlayer && playerVelocity.y < 0) {
             playerVelocity.y = 0f;
         }
-
+        
+        if (Input.GetKey(KeyCode.LeftShift)) {
+            sprintModifier = 10;
+        }
+        else {
+            sprintModifier = 1;
+        }
+        
         // Makes the player move
         Vector2 movement = inputManager.GetPlayerMovement();
         Vector3 move = new (movement.x, 0, movement.y);
         move = cameraTransform.forward.normalized * move.z + cameraTransform.right.normalized * move.x;
         move.y = 0f; // is used to make sure the player is not moving upwards, when the camera is moved
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        controller.Move(move * Time.deltaTime * (playerSpeed + sprintModifier));
+        print(playerSpeed);
 
         // Makes the player jump
         if (inputManager.PlayerJumpedThisFrame() && groundedPlayer) {
