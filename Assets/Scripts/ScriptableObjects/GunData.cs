@@ -9,6 +9,8 @@ public class GunData : ScriptableObject {
     [Header("Shooting")]
     public float damage;
     public float maxDistance;
+    public int bulletsPerTap; // The amount of bullets the gun fires per trigger pull
+    public float spread;
 
     [Header("Reloading")]
     public int currentAmmo;

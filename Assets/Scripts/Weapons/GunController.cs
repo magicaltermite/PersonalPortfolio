@@ -1,55 +1,75 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Data.Common;
 using ScriptableObjects;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using Weapons;
+using Random = UnityEngine.Random;
 
-
+namespace Weapons {
 public class GunController : MonoBehaviour {
 
     [SerializeField] private GunData gunData;
-    [SerializeField] private GameObject camera;
-    [SerializeField] private LayerMask playerMask;
+    
+    [SerializeField] private GameObject bulletHole;
 
+    
+    private new Camera camera;
     private float timeSinceLastShot;
     private bool CanShoot() => !gunData.reloading && timeSinceLastShot > 1f / (gunData.fireRate / 60f);
     
     private void Start() {
+        camera = Camera.main;
         gunData.currentAmmo = 6;
 
         PlayerShoot.ShootInput += ShootGun;
         PlayerShoot.ReloadInput += StartReloadGun;
+        
+        UIManager.Instance.SetAmmo(gunData);
     }
     
+
 
     private void Update() {
         timeSinceLastShot += Time.deltaTime;
     }
 
-    public void ShootGun() {
+    private void ShootGun() {
+        camera = Camera.main;
         if (gunData.currentAmmo <= 0) return;
         if (!CanShoot()) return;
 
         Transform cameraTransform = camera.transform;
-        
-        if (Physics.Raycast(camera.transform.position, cameraTransform.forward, out RaycastHit hitInfo,
-                gunData.maxDistance)) {
-            Debug.Log("Gun has been shot");
-            IDamagable damageable = hitInfo.transform.GetComponent<IDamagable>();
-            damageable?.Damage(gunData.damage);
+
+        int counter = 0;
+
+        while (counter < gunData.bulletsPerTap) {
+            
+            // This is for calculating the spread of the gun
+            float x = Random.Range(-gunData.spread, gunData.spread);
+            float y = Random.Range(-gunData.spread, gunData.spread);
+            Vector3 direction = cameraTransform.forward + new Vector3(x, y, 0);
+
+            if (Physics.Raycast(camera.transform.position, direction, out RaycastHit hitInfo,
+                    gunData.maxDistance)) {
+                IDamagable damageable = hitInfo.transform.GetComponent<IDamagable>();
+                damageable?.Damage(gunData.damage);
+                GameObject obj = Instantiate(bulletHole, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+            }
+            
+            counter++;
         }
-        
+
         gunData.currentAmmo--;
-        UIManager.Instance.SetAmmo();
+        UIManager.Instance.SetAmmo(gunData);
         timeSinceLastShot = 0;
         OnGunShot();
+        
+        
     }
 
+    private void OnDisable() => gunData.reloading = false;
+    
     private void StartReloadGun() {
-        if (!gunData.reloading) {
+        if (!gunData.reloading && gameObject.activeSelf) {
             StartCoroutine(ReloadGun());
         }
     }
@@ -62,19 +82,22 @@ public class GunController : MonoBehaviour {
         if (gunData.currentAmmo < gunData.magSize) {
             gunData.currentAmmo++;    
             gunData.reloading = false;
-            UIManager.Instance.SetAmmo();
+            UIManager.Instance.SetAmmo(gunData);
         }
         else {
             gunData.reloading = false;
         }
-        
-        
-        
     }
-    
-    
 
     private void OnGunShot() {
-        
+        print("gun shot");
     }
+
+
+    public GunData GetGunData() {
+        return gunData;
+    }
+
+    
+}
 }

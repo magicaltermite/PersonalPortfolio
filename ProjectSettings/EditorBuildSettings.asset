@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/FirstDraft.unity
+    guid: 6dfef057291ee5e43a56f9082e38d824
   m_configObjects: {}

@@ -14,7 +14,6 @@ public class UIManager : MonoBehaviour
     private InputManager inputManager;
 
     [Header("In Game UI")]
-    [SerializeField] private GunData gunData;
     [SerializeField] private TMP_Text ammoCounter;
 
     [Header("Pause Menu")] 
@@ -32,7 +31,6 @@ public class UIManager : MonoBehaviour
     }
 
     private void Start() {
-        SetAmmo();
         inputManager = InputManager.Instance;
         
         resumeButton.onClick.AddListener(() => OnPause(false));
@@ -45,7 +43,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void SetAmmo() {
+    public void SetAmmo(GunData gunData) {
         ammoCounter.text = "Ammo:" + gunData.currentAmmo;
     }
 

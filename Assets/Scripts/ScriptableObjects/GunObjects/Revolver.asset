@@ -15,7 +15,9 @@ MonoBehaviour:
   name: Revolver
   damage: 34
   maxDistance: 6000
-  currentAmmo: 6
+  bulletsPerTap: 1
+  spread: 0
+  currentAmmo: 5
   magSize: 6
   fireRate: 600
   reloadTime: 0.1
