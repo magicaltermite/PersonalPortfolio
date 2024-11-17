@@ -182,6 +182,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""9fae52f4-d5e0-4e36-9662-a1b6817e8236"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""9cdc8d45-8991-4f98-93dc-2246a5986f35"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
