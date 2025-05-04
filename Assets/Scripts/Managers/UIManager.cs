@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
 
     [Header("In Game UI")]
     [SerializeField] private TMP_Text ammoCounter;
+    [SerializeField] private TMP_Text healthCounter;
+
 
     [Header("Pause Menu")] 
     [SerializeField] private GameObject pauseMenu;
@@ -45,6 +47,10 @@ public class UIManager : MonoBehaviour
 
     public void SetAmmo(GunData gunData) {
         ammoCounter.text = "Ammo:" + gunData.currentAmmo;
+    }
+
+    public void SetHealth(int health) {
+        healthCounter.text = "Health:" + health;
     }
 
     public void OnPause(bool isPaused) {

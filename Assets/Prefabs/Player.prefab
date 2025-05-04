@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 6272632420013299594}
   - component: {fileID: 3142267591551421798}
   - component: {fileID: 4801626718710567941}
+  - component: {fileID: 5757452928495491971}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -84,6 +85,7 @@ MonoBehaviour:
   playerSpeed: 10
   jumpHeight: 1
   gravityValue: -19.81
+  sprintModifier: 2
 --- !u!143 &3142267591551421798
 CharacterController:
   m_ObjectHideFlags: 0
@@ -122,6 +124,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9242a534c9eba2c40bc84051ae317434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5757452928495491971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2385338610655018687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9898f7ac4b55b2b41813e7785d0b6eab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 100
+  isPlayer: 1
 --- !u!1 &6111465737895041879
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,13 +245,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6343922556988814486}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.446, z: 0}
+  m_LocalRotation: {x: -0, y: -0.24740767, z: -0, w: 0.9689115}
+  m_LocalPosition: {x: 0, y: 0.4460001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1181703306200691740}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -28.648, z: 0}
 --- !u!1 &7996053333177138167
 GameObject:
   m_ObjectHideFlags: 0

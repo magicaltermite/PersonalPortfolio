@@ -184,6 +184,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5092977008642459946, guid: 68acd014d0295f4428f14a1599953604, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8769767369126835063, guid: 68acd014d0295f4428f14a1599953604, type: 3}
       propertyPath: camera
       value: 
@@ -191,10 +195,33 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2286173588950855102, guid: 68acd014d0295f4428f14a1599953604, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3118511779115254337}
   m_SourcePrefab: {fileID: 100100000, guid: 68acd014d0295f4428f14a1599953604, type: 3}
 --- !u!4 &5779419049487022217 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2338688823708692911, guid: 68acd014d0295f4428f14a1599953604, type: 3}
   m_PrefabInstance: {fileID: 8088515616163072294}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8068815408768099480 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2286173588950855102, guid: 68acd014d0295f4428f14a1599953604, type: 3}
+  m_PrefabInstance: {fileID: 8088515616163072294}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3118511779115254337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8068815408768099480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b634caf67c6b714696882cd621fcae0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons: []
+  keys: 3100000032000000
+  switchTime: 0

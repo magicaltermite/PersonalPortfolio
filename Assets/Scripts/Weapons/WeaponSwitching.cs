@@ -1,61 +1,59 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Weapons;
 
-public class WeaponSwitching : MonoBehaviour {
-    [SerializeField] private Transform[] weapons;
-    [SerializeField] private KeyCode[] keys;
-    [SerializeField] private float switchTime;
+namespace Weapons {
+    public class WeaponSwitching : MonoBehaviour {
+        [SerializeField] private Transform[] weapons;
+        [SerializeField] private KeyCode[] keys;
+        [SerializeField] private float switchTime;
     
-    private int selectedWeapon;
-    private float timeSinceLastSwitch;
+        private int selectedWeapon;
+        private float timeSinceLastSwitch;
 
-    private void Start() {
-        SetWeapons();
-        Select(selectedWeapon);
+        private void Start() {
+            SetWeapons();
+            Select(selectedWeapon);
 
-        timeSinceLastSwitch = 0f;
-    }
+            timeSinceLastSwitch = 0f;
+        }
 
-    private void Update() {
-        int previousSelectedWeapon = selectedWeapon;
+        private void Update() {
+            var previousSelectedWeapon = selectedWeapon;
 
-        for (int i = 0; i < keys.Length; i++) {
-            if (Input.GetKeyDown(keys[i]) && timeSinceLastSwitch >= switchTime) {
-                selectedWeapon = i;
+            for (var i = 0; i < keys.Length; i++) {
+                if (Input.GetKeyDown(keys[i]) && timeSinceLastSwitch >= switchTime) {
+                    selectedWeapon = i;
+                }
             }
-        }
         
-        if(previousSelectedWeapon != selectedWeapon) Select(selectedWeapon);
+            if(previousSelectedWeapon != selectedWeapon) Select(selectedWeapon);
 
-        timeSinceLastSwitch += Time.deltaTime;
-    }
-
-    private void SetWeapons() {
-        weapons = new Transform[transform.childCount];
-
-        for (int i = 0; i < transform.childCount; i++) {
-            weapons[i] = transform.GetChild(i);
+            timeSinceLastSwitch += Time.deltaTime;
         }
 
-        if (keys == null) keys = new KeyCode[weapons.Length];
-    }
+        private void SetWeapons() {
+            weapons = new Transform[transform.childCount];
 
-    private void Select(int weaponIndex) {
-        for (int i = 0; i < weapons.Length; i++) {
-            weapons[i].gameObject.SetActive(i == weaponIndex);
+            for (var i = 0; i < transform.childCount; i++) {
+                weapons[i] = transform.GetChild(i);
+            }
+
+            keys ??= new KeyCode[weapons.Length];
         }
 
-        timeSinceLastSwitch = 0f;
+        private void Select(int weaponIndex) {
+            for (var i = 0; i < weapons.Length; i++) {
+                weapons[i].gameObject.SetActive(i == weaponIndex);
+            }
 
-        OnWeaponSelected(weapons[weaponIndex]);
-    }
+            timeSinceLastSwitch = 0f;
 
-    private void OnWeaponSelected(Transform transform) {
-        GunController gunController = transform.gameObject.GetComponent<GunController>();
+            OnWeaponSelected(weapons[weaponIndex]);
+        }
+
+        private void OnWeaponSelected(Transform gunControllerTransform) {
+            var gunController = gunControllerTransform.gameObject.GetComponent<GunController>();
         
-        UIManager.Instance.SetAmmo(gunController.GetGunData());
+            UIManager.Instance.SetAmmo(gunController.GetGunData());
+        }
     }
 }

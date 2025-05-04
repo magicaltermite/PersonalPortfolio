@@ -10,6 +10,7 @@ public class GunController : MonoBehaviour {
     [SerializeField] private GunData gunData;
     
     [SerializeField] private GameObject bulletHole;
+    [SerializeField] private LayerMask playerMask;
 
     
     private new Camera camera;
@@ -20,8 +21,8 @@ public class GunController : MonoBehaviour {
         camera = Camera.main;
         gunData.currentAmmo = 6;
 
-        PlayerShoot.ShootInput += ShootGun;
-        PlayerShoot.ReloadInput += StartReloadGun;
+        PlayerShoot.shootInput += ShootGun;
+        PlayerShoot.reloadInput += StartReloadGun;
         
         UIManager.Instance.SetAmmo(gunData);
     }
@@ -37,33 +38,33 @@ public class GunController : MonoBehaviour {
         if (gunData.currentAmmo <= 0) return;
         if (!CanShoot()) return;
 
-        Transform cameraTransform = camera.transform;
+        var cameraTransform = camera?.transform;
 
-        int counter = 0;
+        var counter = 0;
 
         while (counter < gunData.bulletsPerTap) {
             
             // This is for calculating the spread of the gun
-            float x = Random.Range(-gunData.spread, gunData.spread);
-            float y = Random.Range(-gunData.spread, gunData.spread);
-            Vector3 direction = cameraTransform.forward + new Vector3(x, y, 0);
-
-            if (Physics.Raycast(camera.transform.position, direction, out RaycastHit hitInfo,
-                    gunData.maxDistance)) {
-                IDamagable damageable = hitInfo.transform.GetComponent<IDamagable>();
-                damageable?.Damage(gunData.damage);
-                GameObject obj = Instantiate(bulletHole, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-            }
+            var x = Random.Range(-gunData.spread, gunData.spread);
+            var y = Random.Range(-gunData.spread, gunData.spread);
             
+            if (cameraTransform != null) {
+                var direction = cameraTransform.forward + new Vector3(x, y, 0);
+
+                if (Physics.Raycast(camera.transform.position, direction, out var hitInfo,
+                        gunData.maxDistance, ~playerMask)) {
+                    var damageable = hitInfo.transform.GetComponent<IDamagable>();
+                    damageable?.Damage(gunData.damage);
+                    var obj = Instantiate(bulletHole, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                }
+            }
+
             counter++;
         }
 
         gunData.currentAmmo--;
         UIManager.Instance.SetAmmo(gunData);
         timeSinceLastShot = 0;
-        OnGunShot();
-        
-        
     }
 
     private void OnDisable() => gunData.reloading = false;
@@ -87,10 +88,6 @@ public class GunController : MonoBehaviour {
         else {
             gunData.reloading = false;
         }
-    }
-
-    private void OnGunShot() {
-        print("gun shot");
     }
 
 

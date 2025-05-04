@@ -4,8 +4,8 @@ using UnityEngine;
 namespace Weapons {
 public class PlayerShoot : MonoBehaviour {
 
-    public static Action ShootInput;
-    public static Action ReloadInput;
+    public static Action shootInput;
+    public static Action reloadInput;
 
     private InputManager inputManager;
 
@@ -15,11 +15,11 @@ public class PlayerShoot : MonoBehaviour {
 
     private void Update() {
         if (inputManager.PlayerPressedShoot()) {
-            ShootInput?.Invoke();
+            shootInput?.Invoke();
         }
 
         if (inputManager.PlayerPressedReload()) {
-            ReloadInput?.Invoke();
+            reloadInput?.Invoke();
         }
     }
 }

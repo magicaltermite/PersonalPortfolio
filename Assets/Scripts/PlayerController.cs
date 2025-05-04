@@ -19,29 +19,27 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         inputManager = InputManager.Instance;
         if (Camera.main != null) cameraTransform = Camera.main.transform;
+        
+        UIManager.Instance.SetHealth((int)GetComponent<Target>().health);
     }
 
-    void Update() {
+    private void Update() {
+        UIManager.Instance.SetHealth((int)GetComponent<Target>().health);
+
         groundedPlayer = controller.isGrounded;
         
         if (groundedPlayer && playerVelocity.y < 0) {
             playerVelocity.y = 0f;
         }
         
-        if (Input.GetKey(KeyCode.LeftShift)) {
-            sprintModifier = 10;
-        }
-        else {
-            sprintModifier = 1;
-        }
+        sprintModifier = Input.GetKey(KeyCode.LeftShift) ? 10 : 1;
         
         // Makes the player move
-        Vector2 movement = inputManager.GetPlayerMovement();
+        var movement = inputManager.GetPlayerMovement();
         Vector3 move = new (movement.x, 0, movement.y);
         move = cameraTransform.forward.normalized * move.z + cameraTransform.right.normalized * move.x;
         move.y = 0f; // is used to make sure the player is not moving upwards, when the camera is moved
         controller.Move(move * Time.deltaTime * (playerSpeed + sprintModifier));
-        print(playerSpeed);
 
         // Makes the player jump
         if (inputManager.PlayerJumpedThisFrame() && groundedPlayer) {
