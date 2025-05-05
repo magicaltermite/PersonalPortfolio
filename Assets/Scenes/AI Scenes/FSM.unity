@@ -1018,84 +1018,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9097784444256128182, guid: 2ba001ee0f6054a43b408a0290c29231, type: 3}
       propertyPath: m_Name
-      value: Enemy
+      value: Enemy_FSM
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 9097784444256128182, guid: 2ba001ee0f6054a43b408a0290c29231, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1353864086}
-    - targetCorrespondingSourceObject: {fileID: 9097784444256128182, guid: 2ba001ee0f6054a43b408a0290c29231, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1353864085}
-    - targetCorrespondingSourceObject: {fileID: 9097784444256128182, guid: 2ba001ee0f6054a43b408a0290c29231, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1353864090}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ba001ee0f6054a43b408a0290c29231, type: 3}
---- !u!1 &1353864084 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9097784444256128182, guid: 2ba001ee0f6054a43b408a0290c29231, type: 3}
-  m_PrefabInstance: {fileID: 1353864083}
-  m_PrefabAsset: {fileID: 0}
---- !u!195 &1353864085
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1353864084}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
---- !u!114 &1353864086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1353864084}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74e3c27438f7bf547873e6a120e6461e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentState: 0
-  damage: 10
---- !u!135 &1353864090
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1353864084}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 10
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1977331152
 PrefabInstance:
   m_ObjectHideFlags: 0
